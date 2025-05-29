@@ -21,6 +21,9 @@ setup(
     entry_points={
         'console_scripts': [
             "hello_world = my_py_pkg.hello_world:main",
+            "demo_publish = my_py_pkg.demo_publish:main",
+            "demo_subscribe = my_py_pkg.demo_subscribe:main"
+
         ],
     },
 )
