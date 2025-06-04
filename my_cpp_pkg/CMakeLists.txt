@@ -8,18 +8,21 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(example_interfaces REQUIRED)
 
-add_executable(cpp_1st_node src/hello_world_1st_cpp.cpp)
-add_executable(cpp_2nd_node src/hello_world_2nd_cpp.cpp)
+add_executable(cpp_1st_node src/hello_world_2nd.cpp)
+add_executable(cpp_2nd_node src/hello_world_2nd.cpp)
+add_executable(robot_dog_publisher src/robot_dog_publisher.cpp)
 
 ament_target_dependencies(cpp_1st_node rclcpp)
 ament_target_dependencies(cpp_2nd_node rclcpp)
+ament_target_dependencies(robot_dog_publisher rclcpp)
+ament_target_dependencies(robot_dog_publisher example_interfaces)
 
-install(TARGETS cpp_1st_node
-  DESTINATION lib/${PROJECT_NAME}
-)
-
-install(TARGETS cpp_2nd_node
+install(TARGETS 
+  cpp_1st_node
+  cpp_2nd_node
+  robot_dog_publisher
   DESTINATION lib/${PROJECT_NAME}
 )
 
