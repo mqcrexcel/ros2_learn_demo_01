@@ -1,5 +1,5 @@
 #include "rclcpp/rclcpp.hpp"
-#include "example_interfaces/msg/string.hpp"
+#include "std_msgs/msg/string.hpp"
 
 using namespace std::placeholders;
 
@@ -8,7 +8,7 @@ class GroundStation : public rclcpp::Node
 public:
     GroundStation() : Node("Ground_Station")
     {
-        subscriber_ = this->create_subscription<example_interfaces::msg::String>(
+        subscriber_ = this->create_subscription<std_msgs::msg::String>(
             "robot_dog_news", 10, 
             std::bind(&GroundStation::stationCallBack, this, _1));
 
@@ -16,12 +16,12 @@ public:
     }
     
 private:
-    void stationCallBack(const example_interfaces::msg::String::SharedPtr msg)
+    void stationCallBack(const std_msgs::msg::String::SharedPtr msg)
     {
         RCLCPP_INFO(this->get_logger(), "Ground station received: '%s'", msg->data.c_str());
     }
 
-    rclcpp::Subscription<example_interfaces::msg::String>::SharedPtr subscriber_;
+    rclcpp::Subscription<std_msgs::msg::String>::SharedPtr subscriber_;
 };
 
 int main(int argc, char **argv)

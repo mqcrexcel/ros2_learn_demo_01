@@ -1,5 +1,5 @@
 #include "rclcpp/rclcpp.hpp"
-#include "example_interfaces/msg/string.hpp"
+#include "std_msgs/msg/string.hpp"
 
 using namespace std::chrono_literals;
 
@@ -8,16 +8,17 @@ class RobotDogTalk : public rclcpp::Node
 public:
     RobotDogTalk() : Node("Robot_Dog_Talk"), robot_name_("RobotDog_01")
     {
-        publisher_ = this->create_publisher<example_interfaces::msg::String>("robot_dog_news", 10);
-        timer_ = this->create_wall_timer(200ms, //std::chrono::milliseconds(200)
-                                         std::bind(&RobotDogTalk::timerCallback, this));     
+        publisher_ = this->create_publisher<std_msgs::msg::String>("robot_dog_news", 10);
+        timer_ = this->create_wall_timer(
+            200ms, //std::chrono::milliseconds(200)
+            std::bind(&RobotDogTalk::timerCallback, this));     
         RCLCPP_INFO(this->get_logger(), "Robot news publisher started");                                    
     }
 
 private:
     void timerCallback()
     {
-        auto msg = example_interfaces::msg::String();
+        auto msg = std_msgs::msg::String();
         msg.data = std::string("Hello, my name is ") + robot_name_;
         // RCLCPP_INFO(this->get_logger(), "Robot news publish: %d", counter_);
         counter_++;
@@ -30,7 +31,7 @@ private:
     }
 
     std::string robot_name_;
-    rclcpp::Publisher<example_interfaces::msg::String>::SharedPtr publisher_;
+    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
     rclcpp::TimerBase::SharedPtr timer_;
     int counter_;
 
