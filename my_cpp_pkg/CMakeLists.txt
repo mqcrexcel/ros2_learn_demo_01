@@ -13,16 +13,20 @@ find_package(example_interfaces REQUIRED)
 add_executable(cpp_1st_node src/hello_world_2nd.cpp)
 add_executable(cpp_2nd_node src/hello_world_2nd.cpp)
 add_executable(robot_dog_publisher src/robot_dog_publisher.cpp)
+add_executable(ground_station src/station_subscriber.cpp)
 
 ament_target_dependencies(cpp_1st_node rclcpp)
 ament_target_dependencies(cpp_2nd_node rclcpp)
 ament_target_dependencies(robot_dog_publisher rclcpp)
 ament_target_dependencies(robot_dog_publisher example_interfaces)
+ament_target_dependencies(ground_station rclcpp)
+ament_target_dependencies(ground_station example_interfaces)
 
 install(TARGETS 
   cpp_1st_node
   cpp_2nd_node
   robot_dog_publisher
+  ground_station
   DESTINATION lib/${PROJECT_NAME}
 )
 
